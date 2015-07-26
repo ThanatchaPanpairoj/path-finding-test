@@ -31,27 +31,27 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * This is the game class. This includes the JFrame, listeners, buttons, and the GameComponent which includes all the objects. The buttons and the components are all added to a panel, which is added to the frame.
+ * This is the World class. This includes the JFrame, listeners, buttons, and the WorldComponent which includes all the objects. The buttons and the components are all added to a panel, which is added to the frame.
  * The main method starts the comp and sets everything up. 
  *
- * @author (Thanatcha Panpairoj, Justin Liu)
- * @version (6/8/15)
+ * @author (Thanatcha Panpairoj)
+ * @version (7/25/15)
  */
 
-public class Game extends JFrame
+public class World extends JFrame
 {
     private int mouseX, mouseY;
 
     public static void main(String[] args)
     {
-        Game game = new Game();
+        World World = new World();
     }
 
-    public Game() {
+    public World() {
         super();
 
         this.setSize(606, 628);
-        this.setTitle("Game");
+        this.setTitle("World");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
@@ -146,10 +146,13 @@ public class Game extends JFrame
         }
         comp.setPreferredSize(new Dimension(width, height));
         comp.addKeyListener(new 
+
             KeyboardListener());
         comp.addMouseListener(new 
+
             MousePressListener());
         comp.addMouseWheelListener(new 
+
             ScrollListener());
         comp.setBounds(0, 0, width, height);
         comp.setFocusable(true);
@@ -167,6 +170,7 @@ public class Game extends JFrame
         //frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setVisible(true);
         this.
+
         setResizable(false);
         comp.requestFocus();
     }

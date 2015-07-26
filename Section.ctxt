@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.params=firstSection
+comment0.target=Section(boolean)
+comment1.params=g2
+comment1.target=void\ draw(java.awt.Graphics2D)
+comment10.params=t
+comment10.target=Tile\ below(Tile)
+comment2.params=character\ x\ y
+comment2.target=void\ addCharacter(Character,\ int,\ int)
+comment3.params=mouseX\ mouseY
+comment3.target=void\ updateInfo(int,\ int)
+comment4.params=
+comment4.target=void\ click()
+comment5.params=from\ to
+comment5.target=java.util.ArrayList\ calculatePath(Tile,\ Tile)
+comment6.params=i\ to
+comment6.target=void\ assignDistanceValues(int,\ Tile)
+comment7.params=t
+comment7.target=Tile\ leftOf(Tile)
+comment8.params=t
+comment8.target=Tile\ rightOf(Tile)
+comment9.params=t
+comment9.target=Tile\ above(Tile)
+numComments=11

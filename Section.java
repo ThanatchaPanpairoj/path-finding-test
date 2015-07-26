@@ -96,35 +96,34 @@ public class Section
     public ArrayList<Tile> calculatePath(Tile from, Tile to) {
         ArrayList<Tile> path = new ArrayList<Tile>();
         assignDistanceValues(0, to);
+        int toX = to.getX();
+        int toY = to.getY();
 
-        Tile pathTile = from;
-        while(true) {
-            int x = pathTile.getX();
-            int y = pathTile.getY();
+        Tile nextTile = from;
+        while(nextTile != to) {
+            int x = nextTile.getX();
+            int y = nextTile.getY();
             ArrayList<Tile> possiblePath = new ArrayList<Tile>();
             if(x > 0)
-                possiblePath.add(leftOf(pathTile));
+                possiblePath.add(leftOf(nextTile));
             if(x < 560)
-                possiblePath.add(rightOf(pathTile));
+                possiblePath.add(rightOf(nextTile));
             if(y > 0)
-                possiblePath.add(above(pathTile));
+                possiblePath.add(above(nextTile));
             if(y < 560)
-                possiblePath.add(below(pathTile));
+                possiblePath.add(below(nextTile));
 
-            Tile nextTile = pathTile;
-            int shortestDistance = pathTile.getDistanceValue();
+            int shortestDistance = nextTile.getDistanceValue();
             for(Tile t : possiblePath) {
                 int tileDistance = t.getDistanceValue();
-                if(tileDistance < shortestDistance) {
+                if(tileDistance <= shortestDistance && Math.sqrt(Math.pow(toX - t.getX(), 2) + Math.pow(toY - t.getY(), 2)) < Math.sqrt(Math.pow(toX - nextTile.getX(), 2) + Math.pow(toY - nextTile.getY(), 2))) {
                     nextTile = t;
                     shortestDistance = tileDistance;
                 }
             }
 
             path.add(nextTile);
-            pathTile = nextTile;
-            if(nextTile == to)
-                break;
+            nextTile.highlight(true);
         }
         return path;
     }

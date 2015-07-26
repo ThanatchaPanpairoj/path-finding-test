@@ -30,9 +30,9 @@ public class Tile
 
         g2.setColor(color);
         g2.fill(r);
-        g2.setColor(Color.BLACK);
+        //g2.setColor(Color.BLACK);
         //g2.drawString(i + "", x + 20, y + 20);
-        g2.drawString(distanceValue + "", x + 20, y + 40);
+        //g2.drawString(distanceValue + "", x + 20, y + 40);
         if(character != null || highlight){
             g2.setColor(Color.WHITE);
             g2.draw(new Rectangle(x + 1, y + 1, 38, 38));

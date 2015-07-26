@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=color\ i\ x\ y
+comment0.target=Tile(java.awt.Color,\ int,\ int,\ int)
+comment1.params=g2
+comment1.target=void\ draw(java.awt.Graphics2D)
+comment2.params=
+comment2.target=void\ empty()
+comment3.params=character
+comment3.target=void\ addCharacter(Character)
+comment4.params=highlight
+comment4.target=void\ highlight(boolean)
+comment5.params=dValue
+comment5.target=void\ assignDistanceValue(int)
+comment6.params=
+comment6.target=int\ getX()
+comment7.params=
+comment7.target=int\ getY()
+comment8.params=
+comment8.target=int\ getDistanceValue()
+numComments=9
