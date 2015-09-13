@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=firstSection
-comment0.target=Section(boolean)
+comment0.params=sectionIndex
+comment0.target=Section(int)
 comment1.params=g2
 comment1.target=void\ draw(java.awt.Graphics2D)
 comment10.params=tileIndex

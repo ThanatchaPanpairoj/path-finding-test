@@ -1,8 +1,5 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.Color;
 
 import java.util.ArrayList;
 
@@ -23,9 +20,17 @@ public class IslandComponent extends JComponent
     public IslandComponent(int width, int height) {
         this.width = width;
         this.height = height;
-        
         sections = new ArrayList<Section>();
-        currentSection = new Section(true);
+        
+        for(int sectionIndex = 0, row = 0; row < 15; row++) {
+            for(int col = 0; col < 15; col++) {
+                if(sectionIndex == 212) {
+                    sections.add(currentSection = new Section(sectionIndex++));;
+                } else {
+                    sections.add(new Section(sectionIndex++));
+                }
+            }
+        }
     }
 
     public void paintComponent(Graphics g) {
@@ -33,11 +38,11 @@ public class IslandComponent extends JComponent
 
         currentSection.draw(g2);
     }
-    
+
     public void updateInfo(int mouseX, int mouseY) {
         currentSection.updateInfo(mouseX, mouseY);
     }
-    
+
     public void click() {
         currentSection.click();
     }

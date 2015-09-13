@@ -42,8 +42,7 @@ public class World extends JFrame
 {
     private int mouseX, mouseY;
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         World World = new World();
     }
 
@@ -145,15 +144,9 @@ public class World extends JFrame
             }
         }
         comp.setPreferredSize(new Dimension(width, height));
-        comp.addKeyListener(new 
-
-            KeyboardListener());
-        comp.addMouseListener(new 
-
-            MousePressListener());
-        comp.addMouseWheelListener(new 
-
-            ScrollListener());
+        comp.addKeyListener(new KeyboardListener());
+        comp.addMouseListener(new MousePressListener());
+        comp.addMouseWheelListener(new ScrollListener());
         comp.setBounds(0, 0, width, height);
         comp.setFocusable(true);
         comp.setVisible(true);
@@ -169,7 +162,6 @@ public class World extends JFrame
 
         //frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setVisible(true);
-        this.
 
         setResizable(false);
         comp.requestFocus();

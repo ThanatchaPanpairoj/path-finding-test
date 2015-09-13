@@ -10,8 +10,8 @@ import java.awt.Rectangle;
  */
 public class BlockedTile extends Tile
 {
-    public BlockedTile(int i, int x, int y) {
-        super(Color.GRAY, i, x, y);
+    public BlockedTile(int index, int x, int y) {
+        super(Color.GRAY, index, x, y);
     }
 
     public void draw(Graphics2D g2) {

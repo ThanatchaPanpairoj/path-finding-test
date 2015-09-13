@@ -11,8 +11,8 @@ public class NextSectionTile extends Tile
 {
     private String direction;
 
-    public NextSectionTile(String d, Color color, int i, int x, int y) {
-        super(color, i, x, y);
+    public NextSectionTile(String d, Color color, int index, int x, int y) {
+        super(color, index, x, y);
         direction = d;
     }
 

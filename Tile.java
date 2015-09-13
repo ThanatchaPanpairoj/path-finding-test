@@ -10,17 +10,17 @@ import java.awt.Rectangle;
  */
 public class Tile
 {
-    private int i, x, y, distanceValue;
+    private int index, x, y, distanceValue;
     private boolean highlight;
     private Color color;
     private Character character;
 
-    public Tile(Color color, int i, int x, int y) {
+    public Tile(Color color, int index, int x, int y) {
         this.color = color;
-        character = null;
-        this.i = i;
+        this.index = index;
         this.x = x;
         this.y = y;
+        character = null;
         highlight = false;
         distanceValue = 999;
     }
@@ -31,7 +31,7 @@ public class Tile
         g2.setColor(color);
         g2.fill(r);
         g2.setColor(Color.BLACK);
-        //g2.drawString(i + "", x + 20, y + 20);
+        //g2.drawString(index + "", x + 20, y + 20);
         //g2.drawString(distanceValue + "", x + 20, y + 40);
         if(character != null || highlight){
             g2.setColor(Color.WHITE);
@@ -54,9 +54,13 @@ public class Tile
     public void assignDistanceValue(int newDistanceValue) {
         distanceValue = newDistanceValue;
     }
-    
+
     public void resetDistanceValue() {
         distanceValue = 999;
+    }
+    
+    public int getIndex() {
+        return index;
     }
 
     public int getX() {

@@ -10,42 +10,43 @@ import java.awt.Color;
  */
 public class Section
 {
-    private int mouseX, mouseY;
+    private int sectionIndex, mouseX, mouseY;
     private boolean confilct;
     private ArrayList<Tile> tiles;
     private ArrayList<Character> characters;
     private Tile currentTile;
     private Character user;
 
-    public Section(boolean firstSection) {
+    public Section(int sectionIndex) {
+        this.sectionIndex = sectionIndex;
         mouseX = 0;
         mouseY = 0;
         confilct = false;
 
         tiles = new ArrayList<Tile>();
-        int tile = 1;
-        for(int row = 0; row < 15; row++) {
+
+        for(int tileIndex = 0, row = 0; row < 15; row++) {
             for(int col = 0; col < 15; col++) {
                 Color tileColor = new Color((int)(Math.random() * 156), (int)(Math.random() * 156 + 100), (int)(Math.random() * 156));
-                if(tile == 8) {
-                    tiles.add(new NextSectionTile("up", tileColor, tile++, col * 40, row * 40));
-                } else if (tile == 106) {
-                    tiles.add(new NextSectionTile("left", tileColor, tile++, col * 40, row * 40));
-                } else if (tile == 120) {
-                    tiles.add(new NextSectionTile("right", tileColor, tile++, col * 40, row * 40));
-                } else if (tile == 218) {
-                    tiles.add(new NextSectionTile("down", tileColor, tile++, col * 40, row * 40));
-                } else if(firstSection && (tile == 81 || tile == 96 || tile == 111 || tile == 126 || tile == 141 || tile == 142 || tile == 143 || tile == 144 || tile == 145 || tile == 130 || tile == 115 || tile == 100 || tile == 85)) {
-                    tiles.add(new BlockedTile(tile++, col * 40, row * 40));
+                if(tileIndex == 7) {
+                    tiles.add(new NextSectionTile("up", tileColor, tileIndex++, col * 40, row * 40));
+                } else if (tileIndex == 105) {
+                    tiles.add(new NextSectionTile("left", tileColor, tileIndex++, col * 40, row * 40));
+                } else if (tileIndex == 119) {
+                    tiles.add(new NextSectionTile("right", tileColor, tileIndex++, col * 40, row * 40));
+                } else if (tileIndex == 217) {
+                    tiles.add(new NextSectionTile("down", tileColor, tileIndex++, col * 40, row * 40));
+                } else if(sectionIndex == 212 && (tileIndex == 80 || tileIndex == 95 || tileIndex == 110 || tileIndex == 125 || tileIndex == 140 || tileIndex == 141 || tileIndex == 142 || tileIndex == 143 || tileIndex == 144 || tileIndex == 129 || tileIndex == 114 || tileIndex == 99 || tileIndex == 84)) {
+                    tiles.add(new BlockedTile(tileIndex++, col * 40, row * 40));
                 } else {
-                    tiles.add(new Tile(tileColor, tile++, col * 40, row * 40));
+                    tiles.add(new Tile(tileColor, tileIndex++, col * 40, row * 40));
                 }
             }
         }
 
         characters = new ArrayList<Character>();
 
-        if(firstSection)
+        if(sectionIndex == 212)
             addCharacter(new Character("You", 280, 280), 280, 280);
     }
 
@@ -109,7 +110,7 @@ public class Section
         while(nextTile != to) {
             int x = nextTile.getX();
             int y = nextTile.getY();
-            int nextTileIndex = tiles.indexOf(nextTile);
+            int nextTileIndex = nextTile.getIndex();
             ArrayList<Tile> possiblePath = new ArrayList<Tile>();
             if(x > 0)
                 possiblePath.add(leftOf(nextTileIndex));
@@ -140,7 +141,7 @@ public class Section
             to.assignDistanceValue(i);
             int x = to.getX();
             int y = to.getY();
-            int tileIndex = tiles.indexOf(to);
+            int tileIndex = to.getIndex();
 
             if(x > 0) {
                 Tile left = leftOf(tileIndex);
