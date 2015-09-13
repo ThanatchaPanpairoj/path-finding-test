@@ -17,12 +17,12 @@ public class Character
     private Tile currentTile;
     private ArrayList<Tile> path;
 
-    public Character(String name, int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Character(String name, Tile startingTile) {
+        this.x = startingTile.getX();
+        this.y = startingTile.getY();
         mouseOver = false;
         this.name = name;
-        this.currentTile = null;
+        this.currentTile = startingTile;
     }
 
     public void draw(Graphics2D g2) {
@@ -40,9 +40,11 @@ public class Character
     public void setPath(ArrayList<Tile> path) {
         this.path = path;
     }
-    
+
     public void setCurrentTile(Tile t) {
         currentTile = t;
+        x = t.getX();
+        y = t.getY();
     }
 
     public void advance() {

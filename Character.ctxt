@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=name\ x\ y
-comment0.target=Character(java.lang.String,\ int,\ int)
+comment0.params=name\ startingTile
+comment0.target=Character(java.lang.String,\ Tile)
 comment1.params=g2
 comment1.target=void\ draw(java.awt.Graphics2D)
 comment2.params=path

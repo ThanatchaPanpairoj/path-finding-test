@@ -69,7 +69,7 @@ public class World extends JFrame
             public void actionPerformed(ActionEvent e) {
                 mouseX = (int)(MouseInfo.getPointerInfo().getLocation().getX() - getLocation().getX() - 3);
                 mouseY = (int)(MouseInfo.getPointerInfo().getLocation().getY() - getLocation().getY() - 25);
-                comp.updateInfo(mouseX, mouseY);
+                comp.updateMouse(mouseX, mouseY);
                 comp.repaint();
             }
         }

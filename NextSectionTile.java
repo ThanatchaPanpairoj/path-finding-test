@@ -45,4 +45,8 @@ public class NextSectionTile extends Tile
             g2.drawLine(arrowPointX, arrowPointY, getX() + 35, getY() + 20);
         }
     }
+    
+    public String getDirection() {
+        return direction;
+    }
 }
