@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=i\ x\ y
+comment0.target=BlockedTile(int,\ int,\ int)
+comment1.params=g2
+comment1.target=void\ draw(java.awt.Graphics2D)
+numComments=2

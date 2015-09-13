@@ -23,22 +23,26 @@ public class Section
         confilct = false;
 
         tiles = new ArrayList<Tile>();
-        int i = 1;
-        for(int row = 0; row < 15; row++)
+        int tile = 1;
+        for(int row = 0; row < 15; row++) {
             for(int col = 0; col < 15; col++) {
                 Color tileColor = new Color((int)(Math.random() * 156), (int)(Math.random() * 156 + 100), (int)(Math.random() * 156));
-                if(i == 8)
-                    tiles.add(new NextSectionTile("up", tileColor, i++, col * 40, row * 40));
-                else if (i == 106) {
-                    tiles.add(new NextSectionTile("left", tileColor, i++, col * 40, row * 40));
-                } else if (i == 120) {
-                    tiles.add(new NextSectionTile("right", tileColor, i++, col * 40, row * 40));
-                } else if (i == 218) {
-                    tiles.add(new NextSectionTile("down", tileColor, i++, col * 40, row * 40));
+                if(tile == 8) {
+                    tiles.add(new NextSectionTile("up", tileColor, tile++, col * 40, row * 40));
+                } else if (tile == 106) {
+                    tiles.add(new NextSectionTile("left", tileColor, tile++, col * 40, row * 40));
+                } else if (tile == 120) {
+                    tiles.add(new NextSectionTile("right", tileColor, tile++, col * 40, row * 40));
+                } else if (tile == 218) {
+                    tiles.add(new NextSectionTile("down", tileColor, tile++, col * 40, row * 40));
+                } else if(firstSection && (tile == 81 || tile == 96 || tile == 111 || tile == 126 || tile == 141 || tile == 142 || tile == 143 || tile == 144 || tile == 145 || tile == 130 || tile == 115 || tile == 100 || tile == 85)) {
+                    //tiles.add(new BlockedTile(tile++, col * 40, row * 40));
+                    tiles.add(new Tile(tileColor, tile++, col * 40, row * 40));
                 } else {
-                    tiles.add(new Tile(tileColor, i++, col * 40, row * 40));
+                    tiles.add(new Tile(tileColor, tile++, col * 40, row * 40));
                 }
             }
+        }
 
         characters = new ArrayList<Character>();
 
@@ -51,12 +55,12 @@ public class Section
             for(Tile t : tiles) {
                 int xDifference = mouseX - t.getX();
                 int yDifference = mouseY - t.getY();
-                if(xDifference < 40 && xDifference >= 0 && yDifference < 40 && yDifference >= 0) {
+                if(xDifference < 40 && xDifference >= 0 && yDifference < 40 && yDifference >= 0 && !(t instanceof BlockedTile)) {
                     currentTile = t;
                     t.highlight(true);
                 } else
                     t.highlight(false);
-                t.assignDistanceValue(1000);
+                t.resetDistanceValue();
             }
 
             calculatePath(user.getTile(), currentTile);
@@ -103,15 +107,16 @@ public class Section
         while(nextTile != to) {
             int x = nextTile.getX();
             int y = nextTile.getY();
+            int nextTileIndex = tiles.indexOf(nextTile);
             ArrayList<Tile> possiblePath = new ArrayList<Tile>();
             if(x > 0)
-                possiblePath.add(leftOf(nextTile));
+                possiblePath.add(leftOf(nextTileIndex));
             if(x < 560)
-                possiblePath.add(rightOf(nextTile));
+                possiblePath.add(rightOf(nextTileIndex));
             if(y > 0)
-                possiblePath.add(above(nextTile));
+                possiblePath.add(above(nextTileIndex));
             if(y < 560)
-                possiblePath.add(below(nextTile));
+                possiblePath.add(below(nextTileIndex));
 
             int shortestDistance = nextTile.getDistanceValue();
             for(Tile t : possiblePath) {
@@ -132,41 +137,43 @@ public class Section
         to.assignDistanceValue(i);
         int x = to.getX();
         int y = to.getY();
+        int tileIndex = tiles.indexOf(to);
+
         if(x > 0) {
-            Tile left = leftOf(to);
+            Tile left = leftOf(tileIndex);
             if(left.getDistanceValue() > i + 1)
                 assignDistanceValues(i + 1, left);
         } 
         if(x < 560) {
-            Tile right = rightOf(to);
+            Tile right = rightOf(tileIndex);
             if(right.getDistanceValue() > i + 1)
                 assignDistanceValues(i + 1, right);
         }
         if(y > 0) {
-            Tile up = above(to);
+            Tile up = above(tileIndex);
             if(up.getDistanceValue() > i + 1)
                 assignDistanceValues(i + 1, up);
         }
         if(y < 560) {
-            Tile down = below(to);
+            Tile down = below(tileIndex);
             if(down.getDistanceValue() > i + 1)
                 assignDistanceValues(i + 1, down);
         } 
     }
 
-    public Tile leftOf(Tile t) {
-        return tiles.get(tiles.indexOf(t) - 1);
+    public Tile leftOf(int tileIndex) {
+        return tiles.get(tileIndex - 1);
     }
 
-    public Tile rightOf(Tile t) {
-        return tiles.get(tiles.indexOf(t) + 1);
+    public Tile rightOf(int tileIndex) {
+        return tiles.get(tileIndex + 1);
     }
 
-    public Tile above(Tile t) {
-        return tiles.get(tiles.indexOf(t) - 15);
+    public Tile above(int tileIndex) {
+        return tiles.get(tileIndex - 15);
     }
 
-    public Tile below(Tile t) {
-        return tiles.get(tiles.indexOf(t) + 15);
+    public Tile below(int tileIndex) {
+        return tiles.get(tileIndex + 15);
     }
 }
