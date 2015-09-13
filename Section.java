@@ -29,13 +29,13 @@ public class Section
         for(int tileIndex = 0, row = 0; row < 15; row++) {
             for(int col = 0; col < 15; col++) {
                 Color tileColor = new Color((int)(Math.random() * 156), (int)(Math.random() * 156 + 100), (int)(Math.random() * 156));
-                if(tileIndex == 7) {
+                if(tileIndex == 7 && sectionIndex > 14) {
                     tiles.add(upNextSectionTile = new NextSectionTile("up", tileColor, tileIndex++, col * 40, row * 40));
-                } else if (tileIndex == 105) {
+                } else if (tileIndex == 105 && sectionIndex % 15 != 0) {
                     tiles.add(leftNextSectionTile = new NextSectionTile("left", tileColor, tileIndex++, col * 40, row * 40));
-                } else if (tileIndex == 119) {
+                } else if (tileIndex == 119 && (sectionIndex - 14) % 15 != 0) {
                     tiles.add(rightNextSectionTile = new NextSectionTile("right", tileColor, tileIndex++, col * 40, row * 40));
-                } else if (tileIndex == 217) {
+                } else if (tileIndex == 217 && sectionIndex < 210) {
                     tiles.add(downNextSectionTile = new NextSectionTile("down", tileColor, tileIndex++, col * 40, row * 40));
                 } else if(sectionIndex == 197 && (tileIndex == 80 || tileIndex == 95 || tileIndex == 110 || tileIndex == 125 || tileIndex == 140 || tileIndex == 141 || tileIndex == 142 || tileIndex == 143 || tileIndex == 144 || tileIndex == 129 || tileIndex == 114 || tileIndex == 99 || tileIndex == 84)) {
                     tiles.add(new BlockedTile(tileIndex++, col * 40, row * 40));
