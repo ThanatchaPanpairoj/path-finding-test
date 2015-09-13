@@ -36,8 +36,7 @@ public class Section
                 } else if (tile == 218) {
                     tiles.add(new NextSectionTile("down", tileColor, tile++, col * 40, row * 40));
                 } else if(firstSection && (tile == 81 || tile == 96 || tile == 111 || tile == 126 || tile == 141 || tile == 142 || tile == 143 || tile == 144 || tile == 145 || tile == 130 || tile == 115 || tile == 100 || tile == 85)) {
-                    //tiles.add(new BlockedTile(tile++, col * 40, row * 40));
-                    tiles.add(new Tile(tileColor, tile++, col * 40, row * 40));
+                    tiles.add(new BlockedTile(tile++, col * 40, row * 40));
                 } else {
                     tiles.add(new Tile(tileColor, tile++, col * 40, row * 40));
                 }
@@ -75,8 +74,6 @@ public class Section
 
     public void addCharacter(Character character, int x, int y) {
         characters.add(character);
-        if(character.getName().equals("You"))
-            user = character;
         for(Tile t : tiles)
             if(Math.abs(x - t.getX()) < 40 && Math.abs(y - t.getY()) < 40) {
                 ArrayList<Tile> startingPath = new ArrayList<Tile>();
@@ -86,6 +83,11 @@ public class Section
                 t.addCharacter(character);
                 break;
             }
+
+        if(character.getName().equals("You")) {
+            user = character;
+            currentTile = user.getTile();
+        }
     }
 
     public void updateInfo(int mouseX, int mouseY) {
@@ -121,7 +123,7 @@ public class Section
             int shortestDistance = nextTile.getDistanceValue();
             for(Tile t : possiblePath) {
                 int tileDistance = t.getDistanceValue();
-                if(tileDistance <= shortestDistance && Math.sqrt(Math.pow(toX - t.getX(), 2) + Math.pow(toY - t.getY(), 2)) < Math.sqrt(Math.pow(toX - nextTile.getX(), 2) + Math.pow(toY - nextTile.getY(), 2))) {
+                if(tileDistance < shortestDistance || (tileDistance == shortestDistance && Math.sqrt(Math.pow(toX - t.getX(), 2) + Math.pow(toY - t.getY(), 2)) < Math.sqrt(Math.pow(toX - nextTile.getX(), 2) + Math.pow(toY - nextTile.getY(), 2)))) {
                     nextTile = t;
                     shortestDistance = tileDistance;
                 }
@@ -134,31 +136,33 @@ public class Section
     }
 
     public void assignDistanceValues(int i, Tile to) {
-        to.assignDistanceValue(i);
-        int x = to.getX();
-        int y = to.getY();
-        int tileIndex = tiles.indexOf(to);
+        if(!(to instanceof BlockedTile)) {
+            to.assignDistanceValue(i);
+            int x = to.getX();
+            int y = to.getY();
+            int tileIndex = tiles.indexOf(to);
 
-        if(x > 0) {
-            Tile left = leftOf(tileIndex);
-            if(left.getDistanceValue() > i + 1)
-                assignDistanceValues(i + 1, left);
-        } 
-        if(x < 560) {
-            Tile right = rightOf(tileIndex);
-            if(right.getDistanceValue() > i + 1)
-                assignDistanceValues(i + 1, right);
+            if(x > 0) {
+                Tile left = leftOf(tileIndex);
+                if(left.getDistanceValue() > i + 1)
+                    assignDistanceValues(i + 1, left);
+            } 
+            if(x < 560) {
+                Tile right = rightOf(tileIndex);
+                if(right.getDistanceValue() > i + 1)
+                    assignDistanceValues(i + 1, right);
+            }
+            if(y > 0) {
+                Tile up = above(tileIndex);
+                if(up.getDistanceValue() > i + 1)
+                    assignDistanceValues(i + 1, up);
+            }
+            if(y < 560) {
+                Tile down = below(tileIndex);
+                if(down.getDistanceValue() > i + 1)
+                    assignDistanceValues(i + 1, down);
+            }
         }
-        if(y > 0) {
-            Tile up = above(tileIndex);
-            if(up.getDistanceValue() > i + 1)
-                assignDistanceValues(i + 1, up);
-        }
-        if(y < 560) {
-            Tile down = below(tileIndex);
-            if(down.getDistanceValue() > i + 1)
-                assignDistanceValues(i + 1, down);
-        } 
     }
 
     public Tile leftOf(int tileIndex) {

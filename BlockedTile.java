@@ -19,4 +19,8 @@ public class BlockedTile extends Tile
         g2.setColor(Color.BLACK);
         g2.draw(new Rectangle(getX() + 1, getY() + 1, 38, 38));
     }
+    
+    public void assignDistanceValue(int newDistanceValue) {
+        super.assignDistanceValue(999);
+    }
 }

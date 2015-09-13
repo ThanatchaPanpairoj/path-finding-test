@@ -32,7 +32,7 @@ public class Tile
         g2.fill(r);
         g2.setColor(Color.BLACK);
         //g2.drawString(i + "", x + 20, y + 20);
-        g2.drawString(distanceValue + "", x + 20, y + 40);
+        //g2.drawString(distanceValue + "", x + 20, y + 40);
         if(character != null || highlight){
             g2.setColor(Color.WHITE);
             g2.draw(new Rectangle(x + 1, y + 1, 38, 38));
@@ -51,8 +51,8 @@ public class Tile
         this.highlight = highlight;
     }
 
-    public void assignDistanceValue(int distanceValue) {
-        distanceValue = distanceValue;
+    public void assignDistanceValue(int newDistanceValue) {
+        distanceValue = newDistanceValue;
     }
     
     public void resetDistanceValue() {
