@@ -12,10 +12,10 @@ public class Section
 {
     private int sectionIndex, mouseX, mouseY;
     private boolean confilct, moved;
+    private Character user;
+    private Tile currentTile, upNextSectionTile, leftNextSectionTile, rightNextSectionTile, downNextSectionTile;
     private ArrayList<Tile> tiles;
     private ArrayList<Character> characters;
-    private Tile currentTile, upNextSectionTile, leftNextSectionTile, rightNextSectionTile, downNextSectionTile;
-    private Character user;
 
     public Section(int sectionIndex) {
         this.sectionIndex = sectionIndex;
