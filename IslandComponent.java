@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 
 /**
- * Write a description of class WorldComponent here.
+ * Write a description of class IslandComponent here.
  * 
  * @author (your name) 
  * @version (a version number or a date)

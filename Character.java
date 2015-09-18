@@ -59,13 +59,13 @@ public class Character
             to.addCharacter(this);
 
             if(nextX < x)
-                x -= 20;
+                x -= 10;
             else if(nextX > x)
-                x += 20;
+                x += 10;
             else if(nextY < y)
-                y -= 20;
+                y -= 10;
             else if(nextY > y)
-                y += 20;
+                y += 10;
 
             if(nextX == x && nextY == y)
                 path.remove(0);
